@@ -1,5 +1,4 @@
  module.exports = {
-    '@disabled' : true,
     '@tags' : 'Home',
     'Homepage' : function(client) {
         client
