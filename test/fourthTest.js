@@ -24,7 +24,10 @@ module.exports = {
         .waitForElementVisible(by.xpath("//img[@class='entered lazyloaded']"))
         .click(by.xpath("//img[@class='entered lazyloaded']"))
         .pause(3000)
-        .end();
+        .getCurrentUrl(function(url){
+            console.log(url.value)
+        })
+        .end()
     },
 
     'Careers' : function (client) {
@@ -32,9 +35,18 @@ module.exports = {
         .waitForElementVisible('body')
         .click(by.xpath("//a[normalize-space()='Careers']"))
         .pause(2000)
-        .waitForElementVisible(by.xpath("//a[normalize-space()='Dive in to Duck Creek']"))
-        .click(by.xpath("//a[normalize-space()='Dive in to Duck Creek']"))
-        .end();
+        .waitForElementVisible(by.xpath("//a[normalize-space()='Life at Duck Creek']"))
+        .click(by.xpath("//a[normalize-space()='Life at Duck Creek']"))
+        .waitForElementVisible(by.xpath("//a[normalize-space()='Apply Now']"))
+        .click(by.xpath("//a[normalize-space()='Apply Now']"))
+        .waitForElementVisible("a[data-automation-id='jobTitle']")
+        .getText("a[data-automation-id='jobTitle']", function(result){
+            console.log(result.value);
+        })
+        .getCurrentUrl(function(url){
+            console.log(url.value)
+        })
+        .end()
     },
 
     'Footer' : function (client) {
@@ -48,7 +60,10 @@ module.exports = {
         .getText("div.copyright", function(result) {
             console.log(result.value);
         })
-        .end();
+        .getCurrentUrl(function(url){
+            console.log(url.value);
+        })
+        .end()
     },
 
     'Header' : function (client) {
@@ -61,7 +76,10 @@ module.exports = {
         .getText("li[class='cta menu-item menu-item-top-level']", function(result) {
          console.log(result.value);
         })
-        .end();
+        .getCurrentUrl(function(url){
+            console.log(url.value)
+        })
+        .end()
        },
 
     'About Us' : function (client) {
@@ -75,7 +93,10 @@ module.exports = {
         console.log(result.value)
      })
      .click(by.xpath("//img[@class='entered lazyloaded']"))
-     .end();
+     .getCurrentUrl(function(url){
+        console.log(url.value)
+     })
+     .end()
     },
 
     'Talk to Sales': function (client) {
@@ -97,12 +118,15 @@ module.exports = {
         .waitForElementVisible("input[name='email']")
         .setValue("input[name='email']", "abcdefg@knoldus.com")
         .waitForElementVisible("textarea[name='message']")
-        .setValue("textarea[name='message']", "Hii...This message is from Test Automation Studion")
+        .setValue("textarea[name='message']", "Hii...This message is from Test Automation Studio")
         .waitForElementVisible(by.xpath("//form[@id='hsForm_b4a2ff0d-4fd5-4164-a9fe-19721a087b53']"))
         .getText(by.xpath("//form[@id='hsForm_b4a2ff0d-4fd5-4164-a9fe-19721a087b53']"), function(result){
             console.log(result.value);
         })
-        .end();
+        .getCurrentUrl(function (url){
+            console.log(url.value)
+        })
+        .end()
     },
 
     'Ecosystem' : function(client) {
@@ -121,12 +145,35 @@ module.exports = {
      .getText("div[class='tabs']", function(result) {
         console.log(result.value);
      })
-     .end();
+     .end()
     },
 
-    afterEach: function(browser) {
+    'Resources' : function (client) {
+     client 
+     .waitForElementVisible(by.xpath("//a[@class='menu-item-link'][normalize-space()='Resources']"))
+     .click(by.xpath("//a[@class='menu-item-link'][normalize-space()='Resources']"))
+     .waitForElementVisible(by.xpath("//a[@class='menu-item-link'][normalize-space()='Blog']"))
+     .click(by.xpath("//a[@class='menu-item-link'][normalize-space()='Blog']"))
+     .waitForElementVisible(by.xpath("//header[@class='blog-header']//div[@class='container']"))
+     .getText(by.xpath("//header[@class='blog-header']//div[@class='container']"), function (result) {
+        console.log(result.value);
+     })
+     .waitForElementVisible("div[class='post-title']")
+     .getText("div[class='post-title']", function (result){
+        console.log(result.value);
+     })
+     .getCurrentUrl(function(url){
+        console.log(url.value)
+     })
+     .end()
+    },
+
+    /* after: function(browser) {
         if(browser.currentTest.results.errors > 0) {
             browser.pause()
         }
-    }
+        browser.screenshot(),function(result){
+        result.value.saveScreenshot('home/knoldus/nightWatch/fail.png')
+        }
+    } */
 }
