@@ -63,6 +63,17 @@ module.exports = {
         .getCurrentUrl(function(url){
             console.log(url.value);
         })
+        .waitForElementVisible(by.xpath("//a[normalize-space()='Mumbai, IN']"))
+        .click(by.xpath("//a[normalize-space()='Mumbai, IN']"))
+        .waitForElementVisible("h1[class='location-name prepared animated']")
+        .assert.textContains("h1[class='location-name prepared animated']","Mumbai, IN")
+        .getText("div[class='location-address']", function(address){
+            console.log(address.value)
+        })
+        .waitForElementVisible(by.xpath("//div[@class='content-wrapper']"))
+        .getText(by.xpath("//div[@class='content-wrapper']"), function(contact){
+            console.log(contact.value)
+        })
         .end()
     },
 
@@ -167,6 +178,75 @@ module.exports = {
      })
      .end()
     },
+
+    'Our Customers' : function(client) {
+        client
+        .useXpath()
+        .waitForElementVisible("//a[normalize-space()='Customers']")
+        .click("//a[normalize-space()='Customers']")
+        .waitForElementVisible("//a[normalize-space()='Meet Our Customers']")
+        .click("//a[normalize-space()='Meet Our Customers']")
+        .waitForElementVisible("//a[normalize-space()='Read More']")
+        .click("//a[normalize-space()='Read More']")
+        .waitForElementVisible("//p[15]")
+        .getText("//p[15]", function(result){
+            console.log(result.value)
+        })
+        .getText("//p[16]", function(result){
+            console.log(result.value)
+        })
+        .getCurrentUrl(function(url){
+            console.log(url.value)
+        })
+        .click("//a[@class='home-link']//img[@alt='Duck Creek']")
+        .end()
+    },
+
+    'Subscribe' : function(client) {
+        client
+        .waitForElementVisible("input[name='email']")
+        .pause(3000)
+        .setValue("input[name='email']", "abcd@knoldus.com")
+        .waitForElementVisible(by.xpath("//input[@value='SUBSCRIBE']"))
+        .click(by.xpath("//input[@value='SUBSCRIBE']"))
+        .pause(3000)
+        .getText("div[class*='submitted']", function(message){
+            console.log(message.value)
+        })
+        .waitForElementVisible("section[class='footer-logos']")
+        .getText("section[class='footer-logos']", function(reviews){
+            console.log(reviews.value)
+        })
+        .waitForElementVisible(by.xpath("//body/footer[@id='main-footer']/div[@class='container footer-wrapper']/div[3]"))
+        .getText(by.xpath("//body/footer[@id='main-footer']/div[@class='container footer-wrapper']/div[3]"), function(customers){
+            console.log(customers.value)
+        })
+        .end()
+    },
+
+    'Get The Report' : function(client) {
+        client
+        .waitForElementVisible(by.xpath("//span[@aria-label='Go to slide 2']"))
+        .click(by.xpath("//span[@aria-label='Go to slide 2']"))
+        .waitForElementVisible(by.xpath("//div[@class='swiper-slide swiper-slide-active']//a[@class='wp-block-button__link wp-element-button'][normalize-space()='Get the Report']"))
+        .click(by.xpath("//div[@class='swiper-slide swiper-slide-active']//a[@class='wp-block-button__link wp-element-button'][normalize-space()='Get the Report']"))
+        .waitForElementVisible("input[name='firstname']")
+        .setValue("input[name='firstname']", "ABCDE")
+        .waitForElementVisible("input[name='lastname']")
+        .setValue("input[name='lastname']", "FGHIJ")
+        .waitForElementVisible("input[name='email']")
+        .setValue("input[name='email']", "abcd@knoldus.com")
+        .waitForElementVisible("input[name='jobtitle']")
+        .setValue("input[name='jobtitle']", "Test Automation Intern")
+        .waitForElementVisible("input[name='company']")
+        .setValue("input[name='company']", "Knoldus Inc | Part Of NashTech") 
+        .getText(by.xpath("//p[contains(text(),'Duck Creek Technologies needs the contact informat')]"), function(policy){
+            console.log(policy.value)
+        })
+        .end()
+    }
+
+    
 
     /* after: function(browser) {
         if(browser.currentTest.results.errors > 0) {
