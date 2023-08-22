@@ -17,3 +17,18 @@ E2E Test Script for DemoBlaze (thirdTest.js) and DuckCreek (fourthTest.js) with 
 ```ruby
 ./node_modules/.bin/nightwatch --test ./test/fourthTest.js --testcase "Careers"
 ```
+
+## NightWatchJS Skeleton
+Below is the tech stack that should be followed for nightWatchJS
+nightwatch-skeleton/
+| -- custom_commands/
+| -- ci/
+     | -- functional-test.Jenkinsfile
+| -- tests/ 
+    | -- functional-tests/
+    | -- visual-tests/
+| -- nightwatch.json
+| -- package.json
+| -- README.md
+| -- gitignore         
+
