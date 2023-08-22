@@ -20,6 +20,7 @@ E2E Test Script for DemoBlaze (thirdTest.js) and DuckCreek (fourthTest.js) with 
 
 ## NightWatchJS Skeleton
 Below is the tech stack that should be followed for nightWatchJS
+```ruby
 nightwatch-skeleton/
 | -- custom_commands/
 | -- ci/
@@ -31,4 +32,4 @@ nightwatch-skeleton/
 | -- package.json
 | -- README.md
 | -- gitignore         
-
+```
