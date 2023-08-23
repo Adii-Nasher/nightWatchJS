@@ -40,7 +40,7 @@ module.exports = {
   test_settings: {
     default: {
       disable_error_log: false,
-      launch_url: 'https://www.demoblaze.com/',
+      launch_url: 'http://localhost',
 
       screenshots: {
         enabled: false,
@@ -54,19 +54,18 @@ module.exports = {
       
       webdriver: {
         start_process: true,
-        server_path: ''
+        server_path: 'node_modules/.bin/chromedriver'
       },
       
     },
     
     firefox: {
       desiredCapabilities: {
-        browserName: 'chrome',
+        browserName: 'firefox',
         alwaysMatch: {
           acceptInsecureCerts: true,
           'moz:firefoxOptions': {
             args: [
-              "--start-fullscreen"
               // '-headless',
               // '-verbose'
             ]
@@ -75,14 +74,61 @@ module.exports = {
       },
       webdriver: {
         start_process: true,
+        server_path: 'node_modules/.bin/geckodriver',
+        cli_args: [
+          // very verbose geckodriver logs
+          // '-vv'
+        ]
+      }
+    },
+    
+    chrome: {
+      desiredCapabilities: {
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+          // More info on Chromedriver: https://sites.google.com/a/chromium.org/chromedriver/
+          //
+          // w3c:false tells Chromedriver to run using the legacy JSONWire protocol (not required in Chrome 78)
+          w3c: true,
+          args: [
+            //'--no-sandbox',
+            //'--ignore-certificate-errors',
+            //'--allow-insecure-localhost',
+            //'--headless'
+          ]
+        }
+      },
+
+      webdriver: {
+        start_process: true,
         server_path: 'node_modules/.bin/chromedriver',
-        port: 4444,
-        host: 'localhost',
-        ssl: false,
-        default_path_prefix: '',
-        proxy: undefined,
-        cli_args: {}
-     }
+        cli_args: [
+          // --verbose
+        ]
+      }
+    },
+    
+    edge: {
+      desiredCapabilities: {
+        browserName: 'MicrosoftEdge',
+        'ms:edgeOptions': {
+          w3c: true,
+          // More info on EdgeDriver: https://docs.microsoft.com/en-us/microsoft-edge/webdriver-chromium/capabilities-edge-options
+          args: [
+            //'--headless'
+          ]
+        }
+      },
+
+      webdriver: {
+        start_process: true,
+        // Follow https://docs.microsoft.com/en-us/microsoft-edge/webdriver-chromium/?tabs=c-sharp#download-microsoft-edge-webdriver
+        // to download the Edge WebDriver and set the location of extracted `msedgedriver` below:
+        server_path: 'node_modules/.bin/edgedriver',
+        cli_args: [
+          //--verbose
+        ]
+      }
     },
     
   },
@@ -90,7 +136,7 @@ module.exports = {
   usage_analytics: {
     enabled: true,
     log_path: './logs/analytics',
-    client_id: '561fcebc-4d3b-443f-a9fc-769443bbbbe0'
+    client_id: 'd8e44fb5-1b20-4bd1-b6b9-db78ab9580ec'
   }
   
 };
